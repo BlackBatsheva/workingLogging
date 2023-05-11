@@ -1,3 +1,4 @@
+
 package io.javabrains.WorkTimeLogging.model;
 
 import java.time.LocalDateTime;
