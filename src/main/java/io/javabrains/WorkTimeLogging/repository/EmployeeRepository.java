@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class EmployeeRepository<content> {
+public class EmployeeRepository<employee> {
 
     private final List<Employee> employeeList = new ArrayList<>();
     public EmployeeRepository(){
@@ -42,7 +42,7 @@ public class EmployeeRepository<content> {
             timeRecords= employee.employeeRecords();
             TimeRecord lastRecord=timeRecords.get(timeRecords.size() - 1);
             LocalDateTime lastExit = lastRecord.exitTime();
-            if(lastExit==null||lastExit==LocalDateTime.now())
+            if(lastExit==null||lastExit.equals(LocalDateTime.now()))
                 return false;
             employee.employeeRecords().add(time);
         }
@@ -59,7 +59,7 @@ public class EmployeeRepository<content> {
         List<TimeRecord> timeRecords= employee.employeeRecords();
         TimeRecord lastRecord=timeRecords.get(timeRecords.size() - 1);
         LocalDateTime lastEnter = lastRecord.enterTime();
-        if(lastRecord.exitTime()!=null||lastEnter==LocalDateTime.now())
+        if(lastRecord.exitTime()!=null||lastEnter .equals(LocalDateTime.now()))
             return false;
         else {
             time = new TimeRecord(
