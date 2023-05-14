@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class EmployeeRepository<employee> {
+public class EmployeeRepository {
 
     private final List<Employee> employeeList = new ArrayList<>();
     public EmployeeRepository(){
@@ -29,7 +29,7 @@ public class EmployeeRepository<employee> {
                 null
         );
 
-        if (!IdExists(id)) {
+        if (IdNotExists(id)) {
             employee = new Employee(
                     id,
                     timeRecords = new ArrayList<>()
@@ -58,7 +58,7 @@ public class EmployeeRepository<employee> {
         List<TimeRecord> timeRecords= employee.employeeRecords();
         TimeRecord lastRecord=timeRecords.get(timeRecords.size() - 1);
         LocalDateTime lastEnter = lastRecord.enterTime();
-        if(lastRecord.exitTime()!=null||lastEnter .equals(LocalDateTime.now()))
+        if(lastRecord.exitTime()!=null||lastEnter.equals(LocalDateTime.now()))
             return false;
         else {
             time = new TimeRecord(
@@ -70,9 +70,9 @@ public class EmployeeRepository<employee> {
         return true;
     }
 
-    public boolean IdExists(Integer id) {
+    public boolean IdNotExists(Integer id) {
 
-        return employeeList.stream().filter(c->c.employee_id().equals(id)).count()==1;
+        return employeeList.stream().filter(c->c.employee_id().equals(id)).count()!=1;
     }
 
     public Optional<Employee> infoById(Integer id) {
