@@ -40,13 +40,12 @@ public class EmployeeRepository<employee> {
         else {
             employee = employeeList.stream().filter(e -> e.employee_id().equals(id)).findFirst().orElse(null);
             timeRecords= employee.employeeRecords();
-            TimeRecord lastRecord=timeRecords.get(timeRecords.size() - 1);
-            LocalDateTime lastExit = lastRecord.exitTime();
+            LocalDateTime lastExit = timeRecords.get(timeRecords.size() - 1).exitTime();
             if(lastExit==null||lastExit.equals(LocalDateTime.now()))
                 return false;
-            employee.employeeRecords().add(time);
+            timeRecords.add(time);
         }
-        return false;
+        return true;
     }
 
 
