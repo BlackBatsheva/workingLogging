@@ -48,7 +48,7 @@ public class EmployeeRepository {
         return true;
     }
 
-
+    @PostConstruct
     public boolean saveExit(Integer id) {
 
         TimeRecord time;
@@ -70,10 +70,12 @@ public class EmployeeRepository {
         return true;
     }
 
+
     public boolean IdNotExists(Integer id) {
 
         return employeeList.stream().filter(c->c.employee_id().equals(id)).count()!=1;
     }
+
 
     public Optional<Employee> infoById(Integer id) {
             return employeeList.stream().filter(c->c.employee_id().equals(id)).findFirst();
